@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>笛吹に拠点を作ります | 増尾圭亮 / Masu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #EFE8D5;
+      --cream-dark: #E2D8C2;
+      --olive: #3E5128;
+      --olive-mid: #556B38;
+      --olive-light: #768A58;
+      --dark: #1C1E17;
+      --text: #282820;
+      --text-mid: #5A5A50;
+      --text-light: #888880;
+      --border: #CFC4AA;
+      --gold: #9B8440;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── DEADLINE BADGE ─── */
+    .deadline-badge {
+      position: fixed;
+      top: 24px;
+      right: 28px;
+      z-index: 100;
+      background: rgba(30,32,24,0.88);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      border-radius: 12px;
+      padding: 10px 18px;
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      line-height: 1.6;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .deadline-badge .label { opacity: 0.6; font-size: 9px; letter-spacing: 0.12em; }
+    .deadline-badge .date { font-weight: 500; font-size: 11px; }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1600&q=85');
+      background-size: cover;
+      background-position: center 30%;
+      filter: brightness(0.55) saturate(0.75);
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(12,16,10,0.72) 0%,
+        rgba(12,16,10,0.30) 60%,
+        rgba(12,16,10,0.10) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 0 60px;
+    }
+    .hero-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 20px;
+      display: block;
+    }
+    .hero-main-text {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(30px, 3.8vw, 56px);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.45;
+      letter-spacing: 0.01em;
+      margin-bottom: 36px;
+    }
+    .hero-main-text em {
+      font-style: normal;
+      display: block;
+      font-size: 0.6em;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.08em;
+      margin-top: 8px;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 44px;
+    }
+    .hero-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.65);
+    }
+    .hero-date-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(255,255,255,0.25);
+    }
+    .hero-name {
+      color: rgba(255,255,255,0.65);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      letter-spacing: 0.14em;
+    }
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+      padding-bottom: 3px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.6); }
+
+    /* ─── INTRO STORY ─── */
+    .intro-story {
+      background: var(--cream);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 60px 0;
+    }
+    .intro-story-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 40px;
+      text-align: center;
+    }
+    .intro-story-text {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(15px, 1.8vw, 20px);
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.95;
+      letter-spacing: 0.04em;
+    }
+    .intro-story-text .highlight {
+      display: inline-block;
+      font-weight: 500;
+      color: var(--olive);
+    }
+    .intro-story-divider {
+      width: 1px;
+      height: 36px;
+      background: var(--border);
+      margin: 32px auto;
+    }
+    .intro-story-meta {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      letter-spacing: 0.15em;
+      color: var(--text-mid);
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--olive);
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 16px 32px;
+      border-radius: 4px;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--olive-mid); transform: translateY(-1px); }
+    .btn-primary .arrow { font-size: 16px; transition: transform 0.2s; }
+    .btn-primary:hover .arrow { transform: translateX(4px); }
+    /* ─── SECTION BASE ─── */
+    .section { padding: 100px 0; }
+    .section-inner { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--olive-mid);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+
+    /* ─── PROFILE ─── */
+    .profile-section { background: var(--cream); }
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .profile-img-wrap {
+      position: relative;
+    }
+    .profile-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+      background: #C8C0AE;
+    }
+    .profile-img-caption {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      background: var(--olive);
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      border-radius: 0 0 4px 4px;
+    }
+    .profile-right { padding-top: 8px; }
+    .profile-name-jp {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 40px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .profile-name-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      letter-spacing: 0.15em;
+      color: var(--text-mid);
+      margin-bottom: 32px;
+    }
+    .profile-text {
+      font-size: 16px;
+      line-height: 2.0;
+      color: var(--text);
+      margin-bottom: 20px;
+      columns: 1;
+    }
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item { text-align: center; }
+    .stat-icon {
+      width: 36px;
+      height: 36px;
+      margin: 0 auto 10px;
+      opacity: 0.6;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-mid);
+      line-height: 1.6;
+      letter-spacing: 0.04em;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      color: var(--olive);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* ─── STORY STEPS ─── */
+    .story-section { background: var(--cream); padding: 0 0 100px; }
+    .steps-grid { display: flex; flex-direction: column; }
+    .step-card {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 0;
+      align-items: stretch;
+      background: var(--cream);
+      border-top: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .step-card:last-child { border-bottom: 1px solid var(--border); }
+    .step-card-body {
+      padding: 72px 56px 72px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .step-card.tbc { background: var(--dark); }
+    .step-card.tbc .step-card-body { padding: 72px 56px 72px 0; }
+    .step-card.tbc .step-num { color: var(--olive-light); }
+    .step-card.tbc .step-title { color: #fff; }
+    .step-card.tbc .step-text { color: rgba(255,255,255,0.65); }
+    .step-img {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+    .step-img-placeholder {
+      width: 100%;
+      min-height: 400px;
+      background: #1a1f14;
+    }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
+      letter-spacing: 0.4em;
+      color: var(--olive-mid);
+      margin-bottom: 18px;
+      display: block;
+      text-transform: uppercase;
+    }
+    .step-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+    .step-text {
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.95;
+      word-break: keep-all;
+    }
+    .tbc-badge {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      color: var(--olive-light);
+      border: 1px solid rgba(118,138,88,0.5);
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-top: 28px;
+      width: fit-content;
+    }
+
+    /* ─── MID CTA ─── */
+    .mid-cta {
+      position: relative;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .mid-cta-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1580137189272-c9379f8864fd?w=1400&q=85');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.5) saturate(0.7);
+    }
+    .mid-cta-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(20,25,14,0.5);
+    }
+    .mid-cta-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+    .mid-cta-text {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(28px, 4vw, 46px);
+      color: #fff;
+      font-weight: 400;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .mid-cta-sub {
+      color: rgba(255,255,255,0.65);
+      font-size: 14px;
+      margin-bottom: 36px;
+    }
+
+    /* ─── MENU SECTION ─── */
+    .menu-section { background: var(--cream); padding: 100px 0; }
+    .menu-header {
+      margin-bottom: 52px;
+    }
+    .menu-section-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--olive-mid);
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+    .menu-common-box {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .menu-common-divider {
+      background: var(--border);
+      align-self: stretch;
+    }
+    .menu-common-col {
+      padding: 36px 44px;
+    }
+    .menu-common-title {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--text-light);
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .menu-common-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .menu-common-item {
+      padding: 14px 0;
+      border-top: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .menu-common-item small {
+      display: block;
+      font-size: 11px;
+      color: var(--text-light);
+      margin-top: 3px;
+      letter-spacing: 0.03em;
+    }
+    .check { display: none; }
+
+    .menu-corp-header {
+      margin: 64px 0 28px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+    }
+    .menu-corp-label {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+    .menu-corp-sub {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .menu-category {
+      margin-bottom: 60px;
+    }
+    .menu-category-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .menu-category-label .cat-tag {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--olive-mid);
+      font-weight: 500;
+    }
+    .menu-category-label .cat-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      font-weight: 400;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .menu-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .menu-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      transform: translateY(-2px);
+    }
+    .menu-card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      background: #D8CEB8;
+    }
+    .menu-card-body { padding: 20px 22px 24px; }
+    .menu-card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      color: var(--olive-mid);
+      margin-bottom: 6px;
+    }
+    .menu-card-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .menu-card-text {
+      font-size: 12px;
+      color: var(--text-mid);
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+    .menu-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .menu-card-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      color: var(--olive);
+      letter-spacing: 0.05em;
+    }
+    .menu-card-price span { font-size: 13px; font-family: 'Noto Sans JP', sans-serif; color: var(--text-mid); }
+    .menu-card-limit {
+      font-size: 11px;
+      color: var(--text-light);
+      background: var(--cream);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .menu-card-btn {
+      display: block;
+      text-align: center;
+      background: var(--olive);
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      padding: 11px;
+      border-radius: 4px;
+      margin-top: 14px;
+      transition: background 0.2s;
+      font-weight: 500;
+    }
+    .menu-card-btn:hover { background: var(--olive-mid); }
+
+    .menu-bottom-cta {
+      position: relative;
+      min-height: 160px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 12px;
+      margin-top: 60px;
+    }
+    .menu-bottom-cta-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?w=1400&q=85');
+      background-size: cover;
+      background-position: center 60%;
+      filter: brightness(0.45) saturate(0.7);
+    }
+    .menu-bottom-cta-content {
+      position: relative;
+      z-index: 2;
+      padding: 40px 48px;
+      width: 100%;
+    }
+    .menu-bottom-cta-text {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 20px;
+      color: #fff;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+    .menu-bottom-cta-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ─── BUDGET SECTION ─── */
+    .budget-section {
+      background: var(--dark);
+      padding: 100px 0;
+    }
+    .budget-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--olive-light);
+      margin-bottom: 16px;
+    }
+    .budget-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(20px, 2vw, 28px);
+      color: #fff;
+      font-weight: 400;
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+    .budget-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .budget-items {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .budget-item {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 24px;
+    }
+    .budget-item-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+    .budget-item-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 6px;
+    }
+    .budget-item-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      color: #fff;
+      letter-spacing: 0.05em;
+    }
+    .budget-note {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      line-height: 2.0;
+      max-width: 640px;
+    }
+
+    /* ─── SCHEDULE ─── */
+    .schedule-section { background: var(--cream); padding: 100px 0; }
+    .h-timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      position: relative;
+      margin-top: 48px;
+    }
+    .h-timeline::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 4px;
+      right: 4px;
+      height: 1px;
+      background: var(--border);
+    }
+    .h-tl-item {
+      position: relative;
+      padding-top: 36px;
+      padding-right: 24px;
+    }
+    .h-tl-item::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 0;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--olive);
+    }
+    .h-tl-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      color: var(--olive-mid);
+      margin-bottom: 10px;
+    }
+    .h-tl-content {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .h-tl-sub {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 6px;
+      line-height: 1.7;
+    }
+    .schedule-note {
+      margin-top: 52px;
+      padding: 28px 32px;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 2.0;
+    }
+    @media (max-width: 900px) {
+      .h-timeline { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .h-timeline::before { display: none; }
+    }
+    @media (max-width: 600px) {
+      .h-timeline { grid-template-columns: 1fr; }
+    }
+
+    /* ─── DEADLINE CTA ─── */
+    .deadline-section { background: var(--cream); padding: 60px 0; }
+    .deadline-box {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 60px 48px;
+      text-align: center;
+      background: #fff;
+    }
+    .deadline-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+    .deadline-date {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .deadline-sub { font-size: 14px; color: var(--text-mid); margin-bottom: 36px; line-height: 1.8; }
+    .deadline-note { font-size: 12px; color: var(--text-light); margin-top: 16px; }
+
+    /* ─── CLOSING ─── */
+    .closing-section {
+      position: relative;
+      padding: 120px 0;
+      overflow: hidden;
+    }
+    .closing-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1600679472829-3044539ce8ed?w=1400&q=85');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.35) saturate(0.6);
+    }
+    .closing-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(20,25,14,0.6);
+    }
+    .closing-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      padding: 0 40px;
+    }
+    .closing-text {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(20px, 3vw, 30px);
+      color: #fff;
+      font-weight: 400;
+      line-height: 1.9;
+      margin-bottom: 48px;
+    }
+    .closing-sig {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 22px;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: var(--dark);
+      padding: 80px 0 48px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+    .footer-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 20px;
+      color: #fff;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .footer-name-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 20px;
+    }
+    .footer-bio {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      line-height: 2.0;
+    }
+    .footer-col-title {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--olive-light);
+      margin-bottom: 16px;
+    }
+    .footer-list { list-style: none; }
+    .footer-list li {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .footer-list a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-list a:hover { color: rgba(255,255,255,0.8); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.08em;
+    }
+    .footer-contact {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ─── NEW MENU ─── */
+    .new-menu-wrap { background: var(--cream); padding: 88px 0 100px; }
+    .new-menu-top {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-bottom: 60px;
+    }
+    .new-menu-h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 38px;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      margin-bottom: 18px;
+    }
+    .new-menu-lead { font-size: 13px; color: var(--text-mid); line-height: 2.1; }
+    .new-menu-gifts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      padding-top: 6px;
+    }
+    .new-menu-gift { display: flex; gap: 16px; align-items: flex-start; }
+    .new-menu-gift-thumb {
+      width: 80px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 4px;
+      flex-shrink: 0;
+      background: var(--cream-dark);
+    }
+    .new-menu-gift-text { font-size: 13px; line-height: 1.9; color: var(--text); padding-top: 2px; }
+    .new-menu-gift-text small { display: block; color: var(--text-mid); font-size: 12px; }
+    .new-menu-cat {
+      border-top: 1px solid var(--border);
+      padding-top: 36px;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      margin-bottom: 28px;
+    }
+    .new-menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .nmc { background: #fff; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+    .nmc-body { padding: 26px 22px 22px; }
+    .nmc-head { font-size: 14px; color: var(--text); margin-bottom: 14px; line-height: 1.4; }
+    .nmc-n { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: var(--text-light); font-weight: 400; letter-spacing: 0.05em; }
+    .nmc-sl { color: var(--text-light); margin: 0 6px; }
+    .nmc-t { font-family: 'Noto Serif JP', serif; font-weight: 500; color: var(--text); }
+    .nmc-text { font-size: 13px; color: var(--text-mid); line-height: 2.1; }
+    .nmc-img { width: 100%; height: 210px; object-fit: cover; display: block; background: var(--cream-dark); }
+    .nmc-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; margin-top: 14px; border-top: 1px solid var(--border); }
+    .nmc-price { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--olive); letter-spacing: 0.05em; }
+    .nmc-price span { font-size: 12px; font-family: 'Noto Sans JP', sans-serif; color: var(--text-mid); }
+    .nmc-btn { display: block; text-align: center; background: var(--olive); color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 0.08em; padding: 10px; border-radius: 4px; margin-top: 12px; transition: background 0.2s; font-weight: 500; }
+    .nmc-btn:hover { background: var(--olive-mid); }
+    .nmc-corp-header { margin: 56px 0 28px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+    .nmc-corp-label { font-family: 'Noto Serif JP', serif; font-size: 18px; font-weight: 400; white-space: nowrap; }
+    .nmc-corp-sub { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
+    @media (max-width: 900px) {
+      .new-menu-top { grid-template-columns: 1fr; gap: 36px; }
+      .new-menu-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .new-menu-gifts { grid-template-columns: 1fr; }
+    }
+
+    /* ─── MENU HEADER ─── */
+    .menu-header-wrap {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 52px;
+    }
+    .menu-h-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 34px;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      margin-bottom: 14px;
+    }
+    .menu-h-desc { font-size: 15px; color: var(--text-mid); line-height: 2.0; }
+    .menu-gifts-box {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .menu-gifts-sep { background: var(--border); align-self: stretch; }
+    .menu-gift-item { display: flex; align-items: center; gap: 18px; padding: 22px 28px; }
+    .menu-gift-photo {
+      width: 90px;
+      height: 72px;
+      object-fit: cover;
+      border-radius: 4px;
+      flex-shrink: 0;
+      background: var(--cream-dark);
+    }
+    .menu-gift-name { font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.75; }
+    .menu-gift-sub { font-size: 12px; color: var(--text-mid); margin-top: 2px; }
+    .menu-gift-pre { font-size: 12px; color: var(--text-mid); margin-bottom: 4px; }
+    @media (max-width: 900px) {
+      .menu-header-wrap { grid-template-columns: 1fr; gap: 28px; }
+      .menu-gifts-box { grid-template-columns: 1fr; }
+      .menu-gifts-sep { width: 100%; height: 1px; }
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ─── STICKY FOOTER CTA ─── */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sticky-cta-text {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+    }
+    .sticky-cta-text strong {
+      color: #fff;
+      margin-right: 12px;
+    }
+    .sticky-cta .btn-primary { padding: 12px 24px; font-size: 13px; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .section { padding: 72px 0; }
+      .section-inner { padding: 0 24px; }
+      .profile-grid { grid-template-columns: 1fr; }
+      .profile-img-wrap { max-width: 320px; }
+      .profile-text { columns: 1; }
+      .step-card { grid-template-columns: 1fr; }
+      .step-card-body { padding: 48px 24px; }
+      .step-card.tbc .step-card-body { padding: 48px 24px; }
+      .step-img, .step-img-placeholder { min-height: 260px; }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .budget-grid { grid-template-columns: 1fr; gap: 40px; }
+      .budget-items { grid-template-columns: 1fr; gap: 24px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .menu-header-wrap { grid-template-columns: 1fr; gap: 32px; }
+      .h-timeline { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .h-timeline::before { display: none; }
+    }
+    @media (max-width: 600px) {
+      /* 全体余白 */
+      .section { padding: 56px 0; }
+      .section-inner { padding: 0 20px; }
+
+      /* Hero CTAボタンをモバイルで画像下に移動 */
+      .hero-cta-wrap {
+        position: static !important;
+        transform: none !important;
+        justify-content: center;
+        padding: 20px 20px 28px;
+        background: var(--cream);
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .hero-cta-wrap .btn-primary { font-size: 14px; padding: 14px 28px; width: 100%; justify-content: center; }
+      .hero-cta-wrap .btn-ghost { display: none; }
+
+      /* Intro story */
+      .intro-story { min-height: auto; padding: 56px 0; }
+      .intro-story-inner { padding: 0 20px; }
+      .intro-story-text { font-size: 15px; letter-spacing: 0.01em; }
+      .intro-story-text span[style] { white-space: normal !important; }
+
+      /* プロフィール */
+      .profile-name-jp { font-size: 28px; }
+      .profile-name-en { font-size: 16px; letter-spacing: 0.08em; }
+      .profile-text { font-size: 15px; line-height: 1.9; }
+
+      /* メニュー */
+      .menu-grid { grid-template-columns: 1fr; }
+      .menu-card-img { min-height: 180px; }
+      .menu-h-title { font-size: 28px; }
+      .menu-corp-header { padding: 24px 0 8px; }
+
+      /* 応援者セクション */
+      .section-title { font-size: clamp(22px, 6vw, 32px); }
+
+      /* フッター */
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer { padding: 48px 0 80px; }
+
+      /* Sticky CTA */
+      .sticky-cta { flex-direction: column; gap: 10px; text-align: center; padding: 12px 16px; }
+      .sticky-cta-text { font-size: 12px; }
+      .sticky-cta .btn-primary { width: 100%; justify-content: center; font-size: 14px; padding: 13px 20px; }
+
+      /* 画像セクション余白なし */
+      .menu-gifts-box { grid-template-columns: 1fr; }
+      .menu-gifts-sep { width: 100%; height: 1px; }
+
+      /* deadline section */
+      .deadline-date { font-size: clamp(22px, 6vw, 36px); }
+      .deadline-box { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- ① HERO -->
+<section style="position: relative;">
+  <img src="ヒーロー.png" alt="山梨県・笛吹市。ここに住みます。" style="display: block; width: 100%; height: auto;">
+  <div class="hero-cta-wrap" style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; gap: 16px; white-space: nowrap;">
+    <a href="#menu" class="btn-primary">応援する <span class="arrow">→</span></a>
+    <a href="#story" class="btn-ghost" style="color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.35);">なぜ笛吹か ↓</a>
+  </div>
+</section>
+
+<!-- ② INTRO STORY（なぜ、なに） -->
+<section class="intro-story" id="story">
+  <div class="intro-story-inner">
+    <div class="intro-story-text">
+      日本全国、そして世界40カ国以上を飛び回り、<br>
+      あらゆるコミュニティに参加してきました。<br><br>
+      自分でもコミュニティを作っていますが、<br>
+      これまでは、オンライン中心です。<br><br>
+      <span class="highlight">リアルな拠点を持つ。</span><br>
+      活動の幅を広げ、仲間との交流の場を作る。<br><br>
+      選んだのは、<span class="highlight">山梨県・笛吹市。</span><br>
+      ワインと温泉、桃源郷の街です。<br><br>
+      <span style="white-space: nowrap;">その挑戦のスタートを一緒に盛り上げてもらえたら嬉しいです。</span>
+    </div>
+    <div class="intro-story-divider"></div>
+    <p class="intro-story-meta">増尾圭亮 / Masu</p>
+  </div>
+</section>
+
+<!-- ② PROFILE -->
+<section class="section profile-section">
+  <div class="section-inner">
+    <div class="section-label">自己紹介</div>
+    <div class="profile-grid">
+      <div class="profile-img-wrap">
+        <img
+          src="プロフィール.png"
+          alt="増尾圭亮 / Masu"
+          class="profile-img"
+        >
+      </div>
+      <div class="profile-right">
+        <h2 class="profile-name-jp">増尾 圭亮（MaSU）</h2>
+        <p class="profile-name-en">FOMUS Founder / Photographer / AI Consultant</p>
+        <div class="profile-text">
+          <p>日本の伝統工芸「枡」を世界に届けるブランド「FOMUS」を立ち上げ、40カ国以上を旅しながら活動。アイルランドとドバイを拠点に、文化・ビジネス・テクノロジーを掛け合わせたプロジェクトを展開しています。</p>
+          <p>現在は、AIを活用しながら、"日本の本質的な価値を世界に届ける"ことに挑戦しています。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY STEPS -->
+<section class="section story-section" style="padding: 0; background: var(--cream);">
+  <img src="１.jpg" alt="なぜ笛吹を選んだか" style="display: block; width: 100%;">
+  <img src="２.jpg" alt="笛吹で何をするか" style="display: block; width: 100%;">
+  <img src="３.jpg" alt="TO BE CONTINUED" style="display: block; width: 100%;">
+</section>
+
+
+<!-- 応援者へのご招待 -->
+<section class="section" style="background: var(--cream); padding: 80px 0;">
+  <div class="section-inner">
+    <div style="max-width: 720px; margin: 0 auto; text-align: center;">
+      <p class="section-label">応援者へのご招待</p>
+      <h2 class="section-title">笛吹BASEへ、ご招待します。</h2>
+      <p style="font-size: 15px; color: var(--text-mid); line-height: 2.0; margin-top: 32px;">
+        応援してくださった方を、6月以降、笛吹BASEへご招待させていただきます。<br><br>
+        応援者の方が集まれる "オープンデー" を、月に1〜2回開きます。<br>
+        そこで、笛吹の仲間と顔を合わせてください。<br><br>
+        ふらっと立ち寄れる場所として、気が向いた時にどうぞ。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ MENU SECTION -->
+<section class="section menu-section" id="menu">
+  <div class="section-inner">
+    <img src="応援メニュー.png" alt="応援メニュー 共通特典" style="display: block; width: 100%; height: auto; margin-bottom: 48px; border-radius: 8px;">
+
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1455849318743-b2233052fcff?w=600&q=80" alt="お気持ち支援" class="menu-card-img">
+        <div class="menu-card-body">
+          <div class="menu-card-num">01</div>
+          <h3 class="menu-card-title">お気持ち支援</h3>
+          <p class="menu-card-text">笛吹からの近況を、定期的にお届け。一緒に、最初の一歩を踏み出しませんか。</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">¥5,000<span> / 枠</span></div>
+          </div>
+          <a href="#" class="menu-card-btn">応援する →</a>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="全力応援" class="menu-card-img">
+        <div class="menu-card-body">
+          <div class="menu-card-num">02</div>
+          <h3 class="menu-card-title">全力応援</h3>
+          <p class="menu-card-text">笛吹に来てくれる方を、半日案内します。ワイナリー、桃源郷、地元のお店へ。</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">¥10,000<span> / 枠</span></div>
+          </div>
+          <a href="#" class="menu-card-btn">応援する →</a>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&q=80" alt="バーカウンタースポンサー" class="menu-card-img">
+        <div class="menu-card-body">
+          <div class="menu-card-num">03</div>
+          <h3 class="menu-card-title">バーカウンタースポンサー</h3>
+          <p class="menu-card-text">あなた専用カクテルを、メニューに1年間。来るたび、無料でご提供。</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">¥30,000<span> / 枠</span></div>
+            <div class="menu-card-limit">限定 5席</div>
+          </div>
+          <a href="#" class="menu-card-btn">応援する →</a>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80" alt="車スポンサー" class="menu-card-img">
+        <div class="menu-card-body">
+          <div class="menu-card-num">04</div>
+          <h3 class="menu-card-title">車スポンサー</h3>
+          <p class="menu-card-text">中古車購入を、一緒に。応援いただいた額は、すべて車購入費に。</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">¥50,000<span> / 枠</span></div>
+            <div class="menu-card-limit">限定 5名</div>
+          </div>
+          <a href="#" class="menu-card-btn">応援する →</a>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=80" alt="生活インフラスポンサー" class="menu-card-img">
+        <div class="menu-card-body">
+          <div class="menu-card-num">05</div>
+          <h3 class="menu-card-title">生活インフラスポンサー</h3>
+          <p class="menu-card-text">冷蔵庫 or 洗濯機に、あなたの名前を。年に150〜3,650回、思い出します。</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">¥20,000<span> / 枠</span></div>
+            <div class="menu-card-limit">限定 10名</div>
+          </div>
+          <a href="#" class="menu-card-btn">応援する →</a>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80" alt="AI合宿" class="menu-card-img">
+        <div class="menu-card-body">
+          <div class="menu-card-num">09</div>
+          <h3 class="menu-card-title">AI合宿（1泊2日）※日程調整自由</h3>
+          <p class="menu-card-text">笛吹で、少人数のAI実践合宿。夜は地元ワインで懇親会、温泉旅館で1泊。</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">¥50,000<span> / 枠</span></div>
+            <div class="menu-card-limit">限定 5名</div>
+          </div>
+          <a href="#" class="menu-card-btn">応援する →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="menu-corp-header">
+      <div class="menu-corp-label">法人向けプラン</div>
+      <p class="menu-corp-sub">笛吹移住後、AI活用支援に本腰を入れます。最初の数社を、ここで募集します。</p>
+    </div>
+
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80" alt="AI導入コンサル" class="menu-card-img">
+        <div class="menu-card-body">
+          <div class="menu-card-num">10</div>
+          <h3 class="menu-card-title">AI導入コンサル（法人）</h3>
+          <p class="menu-card-text">2時間のオンラインセッション＋提案書。中小企業から個人事業主まで対応。</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">¥100,000<span> / 社</span></div>
+            <div class="menu-card-limit">限定 3社</div>
+          </div>
+          <a href="#" class="menu-card-btn">応援する →</a>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80" alt="AI導入サポート" class="menu-card-img">
+        <div class="menu-card-body">
+          <div class="menu-card-num">11</div>
+          <h3 class="menu-card-title">AI導入サポート（法人・1ヶ月）</h3>
+          <p class="menu-card-text">完全フルオーダーメイドの伴走サポート。実装からAI研修、効果測定まで。</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">¥200,000<span> / 社</span></div>
+            <div class="menu-card-limit">限定 3社</div>
+          </div>
+          <a href="#" class="menu-card-btn">応援する →</a>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="ゴールドメンバー" class="menu-card-img">
+        <div class="menu-card-body">
+          <div class="menu-card-num">12</div>
+          <h3 class="menu-card-title">ゴールドメンバー</h3>
+          <p class="menu-card-text">最大の支援者として、まっすー拠点の最も目立つ場所に、お名前を掲載。</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">¥200,000<span> / 枠</span></div>
+            <div class="menu-card-limit">限定 4枠</div>
+          </div>
+          <a href="#" class="menu-card-btn">応援する →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ BUDGET -->
+<section style="padding: 0; background: var(--cream);">
+  <img src="未来.png" alt="いただいたお金の使い道" style="display: block; width: 100%; height: auto;">
+</section>
+
+<!-- ⑧ SCHEDULE -->
+<section style="padding: 0; background: var(--cream);">
+  <img src="スケジュール.jpg" alt="これからのスケジュール" style="display: block; width: 100%; height: auto;">
+</section>
+
+<!-- DEADLINE CTA -->
+<section class="deadline-section">
+  <div class="section-inner">
+    <div class="deadline-box">
+      <p class="deadline-label">締 切</p>
+      <h2 class="deadline-date">2026年6月6日 23:59</h2>
+      <p class="deadline-sub">
+        応援メニューは限定数があるので、気になる枠は、お早めに。
+      </p>
+      <a href="#menu" class="btn-primary">応援メニューを見る <span class="arrow">→</span></a>
+      <p class="deadline-note">笛吹で、お会いできるのを楽しみにしています。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="section-inner">
+    <div class="footer-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+      <div>
+        <p class="footer-col-title">SNS</p>
+        <ul class="footer-list">
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">X（旧Twitter）</a></li>
+          <li><a href="#">note</a></li>
+          <li><a href="#">Facebook</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">お問い合わせ</p>
+        <ul class="footer-list">
+          <li>ご不明な点はメールにてお気軽にどうぞ。</li>
+          <li><a href="mailto:">お問い合わせはこちら</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">笛吹移住応援プロジェクト</p>
+        <ul class="footer-list">
+          <li>締切：2026年6月6日 23:59</li>
+          <li>決済：FOMUSショップ経由</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 増尾圭亮 / Masu. All rights reserved.</p>
+      <p class="footer-contact">笛吹で、お会いしましょう。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky CTA -->
+<div class="sticky-cta">
+  <p class="sticky-cta-text">
+    <strong>締切：2026年6月6日 23:59</strong>
+    限定枠があります。お早めに。
+  </p>
+  <a href="#menu" class="btn-primary">応援メニューを見る <span class="arrow">→</span></a>
+</div>
+
+</body>
+</html>
