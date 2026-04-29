@@ -237,6 +237,14 @@
     .btn-primary:hover { background: var(--olive-mid); transform: translateY(-1px); }
     .btn-primary .arrow { font-size: 16px; transition: transform 0.2s; }
     .btn-primary:hover .arrow { transform: translateX(4px); }
+    .hero-cta-wrap .btn-primary {
+      background: #fff;
+      color: var(--olive);
+    }
+    .hero-cta-wrap .btn-primary:hover {
+      background: var(--cream);
+      transform: translateY(-1px);
+    }
     /* ─── SECTION BASE ─── */
     .section { padding: 100px 0; }
     .section-inner { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
@@ -1150,7 +1158,8 @@
         flex-wrap: wrap;
         gap: 12px;
       }
-      .hero-cta-wrap .btn-primary { font-size: 14px; padding: 14px 28px; width: 100%; justify-content: center; }
+      .hero-cta-wrap .btn-primary { font-size: 14px; padding: 14px 28px; width: 100%; justify-content: center; background: var(--olive); color: #fff; }
+      .hero-cta-wrap .btn-primary:hover { background: var(--olive-mid); }
       .hero-cta-wrap .btn-ghost { display: none; }
 
       /* Intro story */
