@@ -568,6 +568,17 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
+    .menu-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 900px) {
+      .menu-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .menu-grid-4 { grid-template-columns: 1fr; }
+    }
     .plan-img-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -1394,7 +1405,7 @@
       <p class="menu-corp-sub">笛吹移住後もAI活用支援に本腰を入れます。最初の数社を、ここで募集します。</p>
     </div>
 
-    <div class="menu-grid">
+    <div class="menu-grid-4">
 
       <div class="menu-card">
         <img src="クラファンプラン/7.png" alt="AI導入コンサル" class="menu-card-img">
@@ -1421,6 +1432,20 @@
             <div class="menu-card-limit">限定 3社</div>
           </div>
           <a href="https://shop.fomus.jp/shop/74ab2c13-b208-412b-afa5-968f4fa4f7e2" class="menu-card-btn" target="_blank" rel="noopener">予約する →</a>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="クラファンプラン/10.png" alt="まっすー講演会プラン" class="menu-card-img">
+        <div class="menu-card-body">
+          <div class="menu-card-num">10</div>
+          <h3 class="menu-card-title">まっすー講演会プラン</h3>
+          <p class="menu-card-text">AI・海外活動・伝統工芸・イベントなど、多彩なテーマで講演。日本全国どこでも伺います。<br><small style="color:var(--text-light);">※交通費実費をご負担ください。</small></p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">¥80,000<span> / 枠</span></div>
+            <div class="menu-card-limit">限定 5枠</div>
+          </div>
+          <a href="#" class="menu-card-btn">予約する →</a>
         </div>
       </div>
 
